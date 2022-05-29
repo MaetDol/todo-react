@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const StyledInput = styled('input')`
+export const StyledInput = styled.input`
   background-color: ${({ theme }) => theme.colors.gray10};
   ${({ theme }) => theme.typography.body}
   ${({ theme }) => theme.effects.shadows.default}
