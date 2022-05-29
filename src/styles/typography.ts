@@ -34,4 +34,5 @@ const typography = {
 };
 
 export type typographyType = typeof typography;
+export type Typography = string;
 export default typography;
