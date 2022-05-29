@@ -1,13 +1,13 @@
 import { Global, ThemeProvider } from '@emotion/react';
 import colors from 'styles/colors';
 import globalStyle from 'styles/global';
-import typography from 'styles/typography';
+import { colors, typography, effects } from 'styles';
 
 function App() {
   return (
     <>
       <Global styles={globalStyle} />
-      <ThemeProvider theme={{ colors, typography }}>
+      <ThemeProvider theme={{ colors, typography, effects }}>
         <div></div>
       </ThemeProvider>
     </>
