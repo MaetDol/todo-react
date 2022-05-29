@@ -10,6 +10,9 @@ const globalStyle = css`
     margin: 0;
     background: ${colors.background};
   }
+  html {
+    font-size: 62.5%;
+  }
 `;
 
 export default globalStyle;
