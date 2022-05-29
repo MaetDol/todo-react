@@ -38,16 +38,17 @@ const colorSet = {
   red30: '#F18693',
   red20: '#F49EA8',
   red10: '#F7B7BE',
-};
+} as const;
 
 const named = {
   background: colorSet.gray80,
   'text-primary': colorSet.gray90,
-};
+} as const;
 
 const colors = {
   ...colorSet,
   ...named,
-};
+} as const;
 
+export type colorsType = typeof colors;
 export default colors;
