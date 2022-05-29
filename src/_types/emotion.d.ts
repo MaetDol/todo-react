@@ -1,10 +1,9 @@
 import '@emotion/react';
-import { colorsType } from 'styles/colors';
-import { typographyType } from 'styles/typography';
 
 declare module '@emotion/react' {
   interface Theme {
-    colors: colorsType;
-    typography: typographyType;
+    colors: import('styles/colors').colorsType;
+    typography: import('styles/typography').typographyType;
+    effects: import('styles/effects').effectsType;
   }
 }
