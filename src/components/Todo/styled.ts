@@ -52,6 +52,8 @@ export const StylessButton = styled.button`
   border: none;
   background-color: transparent;
   padding: 0;
+  display: flex;
+  align-items: center;
 `;
 
 export const StyledEditButton = styled(StylessButton)<{
