@@ -1,5 +1,5 @@
 import Icon, { Icons } from 'components/Icon';
-import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
+import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import {
   StyledDeleteButton,
   StyledEditButton,
@@ -16,6 +16,7 @@ export default function Todo({
   content,
   setContent,
   edit = false,
+  deleteHandler,
 }: Props) {
   const [editing, setEditing] = useState(edit);
   useEffect(() => {
@@ -25,7 +26,7 @@ export default function Todo({
   const ref = useRef<HTMLInputElement>(null);
   const [prevContent, setPrevContent] = useState(content);
   const startEdit = () => {
-    setEditing(true);
+    setEditing(!editing);
     setPrevContent(content);
     // display: none 에서 바뀌고 업데이트 되기전엔 focus 되지 않습니다
     // useLayoutEffect 를 고려해봐야합니다
@@ -62,7 +63,7 @@ export default function Todo({
         <Icon icon={Icons.edit} />
       </StyledEditButton>
 
-      <StyledDeleteButton>
+      <StyledDeleteButton onClick={deleteHandler}>
         <Icon icon={Icons.cancel} />
       </StyledDeleteButton>
     </StyledWrapper>
@@ -75,4 +76,5 @@ type Props = {
   content: string;
   setContent: (content: string) => void;
   edit?: boolean;
+  deleteHandler: () => void;
 };
