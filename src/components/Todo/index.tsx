@@ -15,47 +15,58 @@ export default function Todo({
   setChecked,
   content,
   setContent,
-  edit = false,
+  edit,
+  setEdit,
   deleteHandler,
 }: Props) {
-  const [editing, setEditing] = useState(edit);
-  useEffect(() => {
-    setEditing(edit);
-  }, [edit]);
-
   const ref = useRef<HTMLInputElement>(null);
-  const [prevContent, setPrevContent] = useState(content);
-  const startEdit = () => {
-    setEditing(!editing);
-    setPrevContent(content);
-    // display: none 에서 바뀌고 업데이트 되기전엔 focus 되지 않습니다
-    // useLayoutEffect 를 고려해봐야합니다
+  const focus = () => {
     setTimeout(() => {
       if (ref.current) ref.current.focus();
     });
   };
 
+  useEffect(() => {
+    if (edit) focus();
+  }, [edit]);
+
+  const [prevContent, setPrevContent] = useState(content);
+  const startEdit = () => {
+    setEdit(!edit);
+    setPrevContent(content);
+    // display: none 에서 바뀌고 업데이트 되기전엔 focus 되지 않습니다
+    // useLayoutEffect 를 고려해봐야합니다
+    focus();
+  };
+
   const onEdit = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') setEditing(false);
+    if (e.key === 'Enter') setEdit(false);
     if (e.key === 'Escape') {
-      setEditing(false);
-      setContent(prevContent);
+      doneEdit(prevContent);
     }
   };
+
+  const doneEdit = (content: string) => {
+    setEdit(false);
+    setContent(content);
+  };
+
+  useEffect(() => {});
 
   return (
     <StyledWrapper>
       <StylessButton onClick={() => setChecked(!checked)}>
         <StyledStatus checked={checked} />
       </StylessButton>
-      <StyledText checked={checked} edit={editing}>
+      <StyledText checked={checked} edit={edit}>
         {content}
       </StyledText>
       <StyledInput
         ref={ref}
-        edit={editing}
+        edit={edit}
         onChange={(e) => setContent(e.target.value)}
         onKeyDown={onEdit}
+        onBlur={() => doneEdit(content)}
         value={content}
       />
 
@@ -75,6 +86,7 @@ type Props = {
   setChecked: (checked: boolean) => void;
   content: string;
   setContent: (content: string) => void;
-  edit?: boolean;
+  edit: boolean;
+  setEdit: (editing: boolean) => void;
   deleteHandler: () => void;
 };
