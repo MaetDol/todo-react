@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 export const StyledWrapper = styled.div`
   display: flex;
+  align-items: flex-start;
   color: ${({ theme }) => theme.colors.gray10};
 `;
 
@@ -14,6 +15,7 @@ export const StyledStatus = styled.span<{
   height: var(--size);
   margin-right: calc(1.2rem - (var(--size) / 2) + 0.8rem);
   margin-left: calc(1.2rem - (var(--size) / 2));
+  margin-top: calc(1.2rem - (var(--size) / 2));
 
   border-radius: ${(props) => (props.checked ? '1.2rem' : '0.4rem')};
   background-color: ${(props) =>
@@ -63,8 +65,10 @@ export const StyledEditButton = styled(StylessButton)<{
     props.checked ? props.theme.colors.gray60 : props.theme.colors.gray20};
   margin-left: 0.8rem;
   transition: fill 0.1s ease-in-out;
+  height: 2.4rem;
 `;
 
 export const StyledDeleteButton = styled(StylessButton)`
   margin-left: 1.6rem;
+  height: 2.4rem;
 `;
