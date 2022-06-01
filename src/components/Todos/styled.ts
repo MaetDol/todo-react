@@ -7,6 +7,7 @@ export const StyledList = styled.ul`
 
 export const StyledItem = styled.li`
   margin-bottom: 3.2rem;
+  list-style: none;
 
   &:last-child {
     margin-bottom: 0;
