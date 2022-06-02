@@ -1,6 +1,6 @@
 import { Color } from 'styles/colors';
 import { Typography } from 'styles/typography';
-import { StyledButton } from './styled';
+import { StyledButton } from './Button.styled';
 
 export default function Button({
   textColor,

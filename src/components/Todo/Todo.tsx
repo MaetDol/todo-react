@@ -8,7 +8,7 @@ import {
   StyledText,
   StyledWrapper,
   StylessButton,
-} from './styled';
+} from './Todo.styled';
 
 export default function Todo({
   checked,

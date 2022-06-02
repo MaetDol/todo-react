@@ -1,6 +1,6 @@
 import { useRequest } from 'api/request';
 import { useEffect } from 'react';
-import { StyledSpan } from './styled';
+import { StyledSpan } from './Icon.styled';
 
 const ICON_PATH =
   window.location.origin + process.env.PUBLIC_URL + '/statics/icons';

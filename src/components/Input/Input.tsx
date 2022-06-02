@@ -1,4 +1,4 @@
-import { StyledInput } from './styled';
+import { StyledInput } from './Input.styled';
 
 export default function Input({
   placeholder,

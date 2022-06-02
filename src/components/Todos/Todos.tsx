@@ -1,6 +1,6 @@
 import Todo from 'components/Todo';
 import { TodoType } from 'models/Todo';
-import { StyledItem, StyledList } from './styled';
+import { StyledItem, StyledList } from './Todos.styled';
 
 export default function Todos({ todos, setTodos }: Props) {
   const deleteHandler = (id: number) => () => {
