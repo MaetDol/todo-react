@@ -1,6 +1,7 @@
-import { BlueTitleButton, Input } from 'components';
+import { BlueButton, Input } from 'components';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { typography } from 'styles';
 import {
   StyledButtonWrapper,
   StyledInputWrapper,
@@ -20,7 +21,7 @@ export default function Login() {
       </StyledInputWrapper>
 
       <StyledButtonWrapper>
-        <BlueTitleButton content="LOGIN" />
+        <BlueButton content="LOGIN" typography={typography.emphasize} />
       </StyledButtonWrapper>
     </StyledWrapper>
   );

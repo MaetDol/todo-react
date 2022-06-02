@@ -1,7 +1,8 @@
 import { Button } from 'components';
 import { colors, typography } from 'styles';
+import { typographyType } from 'styles/typography';
 
-export default function BlueTitleButton({ content }: Props) {
+export default function BlueButton({ content, typography: typo }: Props) {
   return (
     <Button
       content={content}
@@ -10,11 +11,12 @@ export default function BlueTitleButton({ content }: Props) {
       backgroundColor={colors.blue50}
       darkenBackgroundColor={colors.blue70}
       lightenBackgroundColor={colors.blue30}
-      typography={typography.title}
+      typography={typo || typography.title}
     />
   );
 }
 
 type Props = {
   content: string;
+  typography?: typographyType[keyof typographyType];
 };
