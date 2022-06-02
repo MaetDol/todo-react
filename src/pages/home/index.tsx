@@ -6,7 +6,7 @@ import {
   StyledAddButton,
   StyledContainer,
   StyledHeaderContainer,
-  StyledLoginButton,
+  StyledLink,
   StyledTodoWrapper,
 } from './styled';
 
@@ -29,9 +29,9 @@ export function Home() {
   return (
     <StyledContainer>
       <StyledHeaderContainer>
-        <StyledLoginButton>
+        <StyledLink to="/login">
           <Icon icon={Icons.login} />
-        </StyledLoginButton>
+        </StyledLink>
       </StyledHeaderContainer>
       <StyledTodoWrapper>
         <Todos setTodos={setTodos} todos={todos} />

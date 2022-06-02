@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 
 export const StyledContainer = styled.div`
   padding-top: calc(6.4rem + 2.4rem);
@@ -15,7 +16,7 @@ export const StyledHeaderContainer = styled.div`
   box-sizing: border-box;
 `;
 
-export const StyledLoginButton = styled.button`
+export const StyledLink = styled(Link)`
   float: right;
   border: none;
   padding: 0;
