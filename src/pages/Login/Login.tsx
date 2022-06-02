@@ -5,7 +5,7 @@ import {
   StyledButtonWrapper,
   StyledInputWrapper,
   StyledWrapper,
-} from './styled';
+} from './Login.styled';
 
 export default function Login() {
   const [email, setEmail] = useState('');

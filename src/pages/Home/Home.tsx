@@ -8,9 +8,9 @@ import {
   StyledHeaderContainer,
   StyledLink,
   StyledTodoWrapper,
-} from './styled';
+} from './Home.styled';
 
-export function Home() {
+export default function Home() {
   const idRef = useRef(1);
   const [todos, setTodos] = useState<TodoType[]>([]);
 
