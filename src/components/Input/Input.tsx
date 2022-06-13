@@ -18,7 +18,7 @@ export default function Input({
 
 type props = {
   placeholder?: string;
-  type?: 'text' | 'number';
+  type?: 'text' | 'number' | 'password';
   value: string;
   setValue: (value: string) => void;
 };
