@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export const StyledWrapper = styled.div``;
 
 export const StyledInputWrapper = styled.div`
-  margin-top: 20rem;
+  padding-top: 20rem;
   text-align: center;
 
   > :first-of-type {
