@@ -21,7 +21,7 @@ export default function Login() {
       </StyledInputWrapper>
 
       <StyledButtonWrapper>
-        <BlueButton content="LOGIN" typography={typography.emphasize} />
+        <BlueButton content="SIGNIN" typography={typography.emphasize} />
       </StyledButtonWrapper>
     </StyledWrapper>
   );
