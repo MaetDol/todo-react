@@ -17,11 +17,17 @@ export default function SignUp() {
     <StyledWrapper>
       <StyledInputWrapper>
         <Input setValue={setEmail} value={email} placeholder="Email" />
-        <Input setValue={setPassword} value={password} placeholder="Password" />
+        <Input
+          setValue={setPassword}
+          value={password}
+          placeholder="Password"
+          type="password"
+        />
         <Input
           setValue={setVerifyPassword}
           value={verifyPassword}
           placeholder="Verify Password"
+          type="password"
         />
         <Link to="/login">sign in</Link>
       </StyledInputWrapper>
