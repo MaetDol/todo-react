@@ -1,6 +1,7 @@
+import { useSignUp } from 'api/account';
 import { BlueButton, Input } from 'components';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { typography } from 'styles';
 import {
   StyledButtonWrapper,
@@ -12,6 +13,12 @@ export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [verifyPassword, setVerifyPassword] = useState('');
+
+  const navigate = useNavigate();
+  const signUp = useSignUp(
+    () => navigate('/login'),
+    () => alert('Failed to Sign up')
+  );
 
   return (
     <StyledWrapper>
@@ -33,7 +40,11 @@ export default function SignUp() {
       </StyledInputWrapper>
 
       <StyledButtonWrapper>
-        <BlueButton content="SIGNUP" typography={typography.emphasize} />
+        <BlueButton
+          onClick={() => signUp('my id here', 'and password here')}
+          content="SIGNUP"
+          typography={typography.emphasize}
+        />
       </StyledButtonWrapper>
     </StyledWrapper>
   );

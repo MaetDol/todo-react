@@ -1,6 +1,7 @@
+import { useSignIn } from 'api/account';
 import { BlueButton, Input } from 'components';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { typography } from 'styles';
 import {
   StyledButtonWrapper,
@@ -11,6 +12,12 @@ import {
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
+  const signIn = useSignIn(
+    () => navigate('/'),
+    () => alert('failed to login')
+  );
 
   return (
     <StyledWrapper>
@@ -26,7 +33,11 @@ export default function Login() {
       </StyledInputWrapper>
 
       <StyledButtonWrapper>
-        <BlueButton content="SIGNIN" typography={typography.emphasize} />
+        <BlueButton
+          onClick={() => signIn('email@email.com', 'OH_MY_PASSWORD')}
+          content="SIGNIN"
+          typography={typography.emphasize}
+        />
       </StyledButtonWrapper>
     </StyledWrapper>
   );
