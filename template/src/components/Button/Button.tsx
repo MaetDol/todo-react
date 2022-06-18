@@ -1,3 +1,4 @@
+import { MouseEventHandler } from 'react';
 import { Color } from 'styles/colors';
 import { Typography } from 'styles/typography';
 import { StyledButton } from './Button.styled';
@@ -10,6 +11,7 @@ export default function Button({
   lightenBackgroundColor,
   typography,
   content,
+  onClick,
 }: props) {
   return (
     <StyledButton
@@ -19,6 +21,7 @@ export default function Button({
       darkenBackgroundColor={darkenBackgroundColor}
       lightenBackgroundColor={lightenBackgroundColor}
       typography={typography}
+      onClick={onClick}
     >
       {content}
     </StyledButton>
@@ -33,4 +36,5 @@ type props = {
   lightenBackgroundColor: Color;
   typography: Typography;
   content: string;
+  onClick: MouseEventHandler<HTMLButtonElement>;
 };

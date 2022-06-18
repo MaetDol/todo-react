@@ -1,8 +1,13 @@
 import { Button } from 'components';
+import { MouseEventHandler } from 'react';
 import { colors, typography } from 'styles';
 import { typographyType } from 'styles/typography';
 
-export default function BlueButton({ content, typography: typo }: Props) {
+export default function BlueButton({
+  content,
+  typography: typo,
+  onClick,
+}: Props) {
   return (
     <Button
       content={content}
@@ -12,6 +17,7 @@ export default function BlueButton({ content, typography: typo }: Props) {
       darkenBackgroundColor={colors.blue70}
       lightenBackgroundColor={colors.blue30}
       typography={typo || typography.title}
+      onClick={onClick}
     />
   );
 }
@@ -19,4 +25,5 @@ export default function BlueButton({ content, typography: typo }: Props) {
 type Props = {
   content: string;
   typography?: typographyType[keyof typographyType];
+  onClick: MouseEventHandler<HTMLButtonElement>;
 };
