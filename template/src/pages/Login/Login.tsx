@@ -1,5 +1,6 @@
 import { useSignIn } from 'api/account';
 import { BlueButton, Input } from 'components';
+import { paths } from 'models/paths';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { typography } from 'styles';
@@ -15,7 +16,7 @@ export default function Login() {
 
   const navigate = useNavigate();
   const signIn = useSignIn(
-    () => navigate('/'),
+    () => navigate(paths.ROOT),
     () => alert('failed to login')
   );
 
@@ -29,7 +30,7 @@ export default function Login() {
           placeholder="Password"
           type="password"
         />
-        <Link to="/signup">sign up</Link>
+        <Link to={paths.SIGNUP}>sign up</Link>
       </StyledInputWrapper>
 
       <StyledButtonWrapper>

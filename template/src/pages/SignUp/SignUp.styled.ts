@@ -10,7 +10,7 @@ export const StyledInputWrapper = styled.div`
     margin-bottom: 2.4rem;
   }
 
-  > :nth-child(2) {
+  > :nth-of-type(2) {
     margin-bottom: 2.4rem;
   }
 

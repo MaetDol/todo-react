@@ -1,5 +1,6 @@
 import { useSignUp } from 'api/account';
 import { BlueButton, Input } from 'components';
+import { paths } from 'models/paths';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { typography } from 'styles';
@@ -16,7 +17,7 @@ export default function SignUp() {
 
   const navigate = useNavigate();
   const signUp = useSignUp(
-    () => navigate('/login'),
+    () => navigate(paths.LOGIN),
     () => alert('Failed to Sign up')
   );
 
