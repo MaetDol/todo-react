@@ -1,7 +1,7 @@
 import { useSignIn } from 'api/account';
 import { BlueButton, Input } from 'components';
 import { paths } from 'models/paths';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { typography } from 'styles';
 import {
@@ -26,26 +26,34 @@ export default function Login() {
     }
   );
 
+  const signInJob = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    signIn(email, password);
+  };
+
   return (
     <StyledWrapper>
-      <StyledInputWrapper>
-        <Input setValue={setEmail} value={email} placeholder="Email" />
-        <Input
-          setValue={setPassword}
-          value={password}
-          placeholder="Password"
-          type="password"
-        />
-        <Link to={paths.SIGNUP}>sign up</Link>
-      </StyledInputWrapper>
+      <form onSubmit={signInJob}>
+        <StyledInputWrapper>
+          <Input setValue={setEmail} value={email} placeholder="Email" />
+          <Input
+            setValue={setPassword}
+            value={password}
+            placeholder="Password"
+            type="password"
+          />
+          <Link to={paths.SIGNUP}>sign up</Link>
+        </StyledInputWrapper>
 
-      <StyledButtonWrapper>
-        <BlueButton
-          onClick={() => signIn('email@email.com', 'OH_MY_PASSWORD')}
-          content="SIGNIN"
-          typography={typography.emphasize}
-        />
-      </StyledButtonWrapper>
+        <StyledButtonWrapper>
+          <BlueButton
+            onClick={signInJob}
+            content="SIGNIN"
+            typography={typography.emphasize}
+          />
+        </StyledButtonWrapper>
+      </form>
     </StyledWrapper>
   );
 }

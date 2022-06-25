@@ -1,6 +1,7 @@
 import { useSignUp } from 'api/account';
 import { BlueButton, Input } from 'components';
 import { paths } from 'models/paths';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { typography } from 'styles';
 import { useEmailInput, usePasswordInput, useValidate } from './SignUp.hooks';
@@ -34,7 +35,9 @@ export default function SignUp() {
     }
   );
 
-  const doSignUp = () => {
+  const doSignUp = (e: React.FormEvent) => {
+    e.preventDefault();
+
     const error = Object.values(errors)[0];
     if (error) {
       alert(error);
