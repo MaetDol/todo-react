@@ -1,9 +1,10 @@
 import { useSignUp } from 'api/account';
 import { BlueButton, Input } from 'components';
 import { paths } from 'models/paths';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { typography } from 'styles';
+import { useValidate } from './SignUp.hooks';
 import {
   StyledButtonWrapper,
   StyledInputWrapper,
@@ -14,6 +15,24 @@ export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [verifyPassword, setVerifyPassword] = useState('');
+
+  const validators = useMemo(() => {
+    return {
+      email: {
+        message: 'Invalid Email',
+        values: [email],
+        validator: (email: string) => /[^@]+@[^@]+\.\w+/.test(email),
+      },
+      password: {
+        message: 'Password is not matched',
+        values: [password, verifyPassword],
+        validator: (password: string, reEnteredPassword: string) =>
+          password === reEnteredPassword,
+      },
+    };
+  }, [email, password, verifyPassword]);
+
+  const errors = useValidate(validators);
 
   const navigate = useNavigate();
   const { signUp } = useSignUp(
@@ -26,6 +45,15 @@ export default function SignUp() {
       alert('Failed to Sign up');
     }
   );
+
+  const doSignUp = () => {
+    const error = Object.values(errors)[0];
+    if (error) {
+      alert(error);
+      return;
+    }
+    signUp(email, password);
+  };
 
   return (
     <StyledWrapper>
@@ -48,7 +76,7 @@ export default function SignUp() {
 
       <StyledButtonWrapper>
         <BlueButton
-          onClick={() => signUp('my id here', 'and password here')}
+          onClick={doSignUp}
           content="SIGNUP"
           typography={typography.emphasize}
         />
