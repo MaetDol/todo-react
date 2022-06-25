@@ -1,7 +1,6 @@
 import { useSignUp } from 'api/account';
 import { BlueButton, Input } from 'components';
 import { paths } from 'models/paths';
-import { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { typography } from 'styles';
 import { useEmailInput, usePasswordInput, useValidate } from './SignUp.hooks';

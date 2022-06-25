@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import Home from './Home';
-import Login from './Login/Login';
-import SignUp from './SignUp/SignUp';
+import Login from './SignIn';
+import SignUp from './SignUp';
 
 export default function RoutesPage() {
   return (
