@@ -1,6 +1,6 @@
 import { AuthError, UserCredential } from 'firebase/auth';
 import { useEffect, useState } from 'react';
-import { signUp } from './firebase';
+import { signIn, signUp } from './firebase';
 
 export function useSignUp(
   onSuccess: (user: UserCredential) => void,
@@ -36,15 +36,31 @@ export function useSignUp(
 }
 
 export function useSignIn(onSuccess: Function, onFailed: Function) {
-  const [done, setDone] = useState(false);
-
+  const [user, setUser] = useState<UserCredential>();
   useEffect(() => {
-    if (!done) return;
+    if (!user) return;
     onSuccess();
-  }, [done]);
+  }, [user]);
 
-  return (email: string, passsword: string) => {
-    console.log('Try sign in..');
-    setTimeout(() => setDone(true), 1000);
+  const [error, setError] = useState<AuthError>();
+  useEffect(() => {
+    if (!error) return;
+    onFailed();
+  }, [error]);
+
+  const [loading, setLoading] = useState<boolean>(false);
+  const signInJob = (email: string, password: string) => {
+    if (loading) return;
+    setLoading(true);
+    signIn(email, password)
+      .finally(() => setLoading(false))
+      .then(setUser)
+      .catch(setError);
+  };
+
+  return {
+    signIn: signInJob,
+    user,
+    error,
   };
 }
