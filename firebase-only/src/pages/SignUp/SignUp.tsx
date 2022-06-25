@@ -46,30 +46,32 @@ export default function SignUp() {
 
   return (
     <StyledWrapper>
-      <StyledInputWrapper>
-        <Input setValue={setEmail} value={email} placeholder="Email" />
-        <Input
-          setValue={setPassword}
-          value={password}
-          placeholder="Password"
-          type="password"
-        />
-        <Input
-          setValue={setVerifyPassword}
-          value={verifyPassword}
-          placeholder="Verify Password"
-          type="password"
-        />
-        <Link to="/login">sign in</Link>
-      </StyledInputWrapper>
+      <form onSubmit={doSignUp}>
+        <StyledInputWrapper>
+          <Input setValue={setEmail} value={email} placeholder="Email" />
+          <Input
+            setValue={setPassword}
+            value={password}
+            placeholder="Password"
+            type="password"
+          />
+          <Input
+            setValue={setVerifyPassword}
+            value={verifyPassword}
+            placeholder="Verify Password"
+            type="password"
+          />
+          <Link to="/login">sign in</Link>
+        </StyledInputWrapper>
 
-      <StyledButtonWrapper>
-        <BlueButton
-          onClick={doSignUp}
-          content="SIGNUP"
-          typography={typography.emphasize}
-        />
-      </StyledButtonWrapper>
+        <StyledButtonWrapper>
+          <BlueButton
+            onClick={doSignUp}
+            content="SIGNUP"
+            typography={typography.emphasize}
+          />
+        </StyledButtonWrapper>
+      </form>
     </StyledWrapper>
   );
 }
