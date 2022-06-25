@@ -27,7 +27,7 @@ export default function SignUp() {
   const { signUp } = useSignUp(
     (user) => {
       console.log(user);
-      navigate(paths.LOGIN);
+      navigate(paths.ROOT);
     },
     (error) => {
       console.log(error);
