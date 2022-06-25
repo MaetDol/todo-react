@@ -35,17 +35,20 @@ export function useSignUp(
   };
 }
 
-export function useSignIn(onSuccess: Function, onFailed: Function) {
+export function useSignIn(
+  onSuccess: (user: UserCredential) => void,
+  onFailed: (error: AuthError) => void
+) {
   const [user, setUser] = useState<UserCredential>();
   useEffect(() => {
     if (!user) return;
-    onSuccess();
+    onSuccess(user);
   }, [user]);
 
   const [error, setError] = useState<AuthError>();
   useEffect(() => {
     if (!error) return;
-    onFailed();
+    onFailed(error);
   }, [error]);
 
   const [loading, setLoading] = useState<boolean>(false);

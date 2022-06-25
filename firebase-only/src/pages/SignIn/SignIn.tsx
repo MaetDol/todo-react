@@ -15,9 +15,15 @@ export default function Login() {
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
-  const signIn = useSignIn(
-    () => navigate(paths.ROOT),
-    () => alert('failed to login')
+  const { signIn } = useSignIn(
+    (user) => {
+      console.log(user);
+      navigate(paths.ROOT);
+    },
+    (error) => {
+      console.log(error);
+      alert('failed to login');
+    }
   );
 
   return (
