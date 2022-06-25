@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Utils } from 'utils/util';
 
 export type Validators = {
@@ -15,6 +15,8 @@ export type InvalidateMessages = {
 
 /**
  * validators 는 반드시 useMemo로 감싸줄 것
+ * 리액트 특성상 [], () => 같은 리터럴로 작성하는 경우가 많은데,
+ * 의존성 확인시 변경으로 받아들인다
  */
 export function useValidate(validators: Validators) {
   const [previousFlattenValidators, setPreviousFlattenValidators] = useState<
@@ -28,8 +30,6 @@ export function useValidate(validators: Validators) {
       previousFlattenValidators
     );
     if (isSame) return;
-
-    console.log(Utils.flattenValuesOfObject(validators));
 
     const errors: InvalidateMessages = {};
     for (const name in validators) {
@@ -45,4 +45,40 @@ export function useValidate(validators: Validators) {
   }, [validators]);
 
   return errors;
+}
+
+export function useEmailInput() {
+  const [email, setEmail] = useState('');
+
+  const validator = useMemo(() => {
+    return {
+      message: 'Invalid Email',
+      values: [email],
+      validator: (email: string) => /[^@]+@[^@]+\.\w+/.test(email),
+    };
+  }, [email]);
+
+  return { email, setEmail, validator };
+}
+
+export function usePasswordInput() {
+  const [password, setPassword] = useState('');
+  const [verifyPassword, setVerifyPassword] = useState('');
+
+  const validator = useMemo(() => {
+    return {
+      message: 'Password is not matched',
+      values: [password, verifyPassword],
+      validator: (password: string, reEnteredPassword: string) =>
+        password === reEnteredPassword,
+    };
+  }, [password, verifyPassword]);
+
+  return {
+    password,
+    setPassword,
+    verifyPassword,
+    setVerifyPassword,
+    validator,
+  };
 }

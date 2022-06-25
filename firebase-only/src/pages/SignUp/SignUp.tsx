@@ -4,7 +4,7 @@ import { paths } from 'models/paths';
 import { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { typography } from 'styles';
-import { useValidate } from './SignUp.hooks';
+import { useEmailInput, usePasswordInput, useValidate } from './SignUp.hooks';
 import {
   StyledButtonWrapper,
   StyledInputWrapper,
@@ -12,27 +12,16 @@ import {
 } from './SignUp.styled';
 
 export default function SignUp() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [verifyPassword, setVerifyPassword] = useState('');
+  const { email, setEmail, validator: emailValidator } = useEmailInput();
+  const {
+    password,
+    setPassword,
+    verifyPassword,
+    setVerifyPassword,
+    validator: passwordValidator,
+  } = usePasswordInput();
 
-  const validators = useMemo(() => {
-    return {
-      email: {
-        message: 'Invalid Email',
-        values: [email],
-        validator: (email: string) => /[^@]+@[^@]+\.\w+/.test(email),
-      },
-      password: {
-        message: 'Password is not matched',
-        values: [password, verifyPassword],
-        validator: (password: string, reEnteredPassword: string) =>
-          password === reEnteredPassword,
-      },
-    };
-  }, [email, password, verifyPassword]);
-
-  const errors = useValidate(validators);
+  const errors = useValidate({ emailValidator, passwordValidator });
 
   const navigate = useNavigate();
   const { signUp } = useSignUp(
