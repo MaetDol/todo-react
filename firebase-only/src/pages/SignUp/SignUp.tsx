@@ -16,9 +16,15 @@ export default function SignUp() {
   const [verifyPassword, setVerifyPassword] = useState('');
 
   const navigate = useNavigate();
-  const signUp = useSignUp(
-    () => navigate(paths.LOGIN),
-    () => alert('Failed to Sign up')
+  const { signUp } = useSignUp(
+    (user) => {
+      console.log(user);
+      navigate(paths.LOGIN);
+    },
+    (error) => {
+      console.log(error);
+      alert('Failed to Sign up');
+    }
   );
 
   return (
