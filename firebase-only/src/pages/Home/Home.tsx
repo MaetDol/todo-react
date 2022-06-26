@@ -1,6 +1,6 @@
 import Icon, { Icons } from 'components/Icon';
 import Todos from 'components/Todos';
-import { TodoType } from 'models/Todo';
+import { Todo } from 'models/Todo';
 import { useRef, useState } from 'react';
 import {
   StyledAddButton,
@@ -12,18 +12,10 @@ import {
 
 export default function Home() {
   const idRef = useRef(1);
-  const [todos, setTodos] = useState<TodoType[]>([]);
+  const [todos, setTodos] = useState<Todo[]>([]);
 
   const addTodo = () => {
-    setTodos([
-      {
-        checked: false,
-        id: idRef.current++,
-        content: '',
-        editing: true,
-      },
-      ...todos,
-    ]);
+    setTodos([new Todo('', idRef.current++, false, true), ...todos]);
   };
 
   return (

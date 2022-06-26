@@ -1,5 +1,5 @@
 import Todo from 'components/Todo';
-import { TodoType } from 'models/Todo';
+import { Todo as TodoModel } from 'models/Todo';
 import { StyledItem, StyledList } from './Todos.styled';
 
 export default function Todos({ todos, setTodos }: Props) {
@@ -50,6 +50,6 @@ export default function Todos({ todos, setTodos }: Props) {
 }
 
 type Props = {
-  todos: TodoType[];
-  setTodos: (todos: TodoType[]) => void;
+  todos: TodoModel[];
+  setTodos: (todos: TodoModel[]) => void;
 };
