@@ -18,7 +18,7 @@ function getDocument(document: string) {
 }
 
 function getCollection(document: string) {
-  return collection(db, document);
+  return collection(db, 'account', document, 'todos');
 }
 
 export function addDocument<T>(document: string, data: T) {
@@ -27,6 +27,12 @@ export function addDocument<T>(document: string, data: T) {
 
 export function loadDocuments(document: string) {
   return getDocs(getCollection(document));
+}
+
+export async function getDatas(document: string): Promise<any[]> {
+  const datas: any[] = [];
+  (await loadDocuments(document)).forEach((d) => datas.push(d.data()));
+  return datas;
 }
 
 export async function loadDocumentWithConverter<T>(
