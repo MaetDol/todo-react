@@ -1,3 +1,4 @@
+import { useAddTodo, useTodos } from 'api/todo';
 import Icon, { Icons } from 'components/Icon';
 import Todos from 'components/Todos';
 import { Todo } from 'models/Todo';
@@ -12,10 +13,12 @@ import {
 
 export default function Home() {
   const idRef = useRef(1);
-  const [todos, setTodos] = useState<Todo[]>([]);
 
-  const addTodo = () => {
-    setTodos([new Todo('', idRef.current++, false, true), ...todos]);
+  const { todos, setTodos } = useTodos();
+  const addTodo = useAddTodo(setTodos);
+
+  const addHandler = () => {
+    addTodo(new Todo('', idRef.current++, false, true));
   };
 
   return (
@@ -28,7 +31,7 @@ export default function Home() {
       <StyledTodoWrapper>
         <Todos setTodos={setTodos} todos={todos} />
       </StyledTodoWrapper>
-      <StyledAddButton onClick={addTodo}>+</StyledAddButton>
+      <StyledAddButton onClick={addHandler}>+</StyledAddButton>
     </StyledContainer>
   );
 }
