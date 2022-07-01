@@ -13,3 +13,7 @@ export function signUp(email: string, password: string) {
 export function signIn(email: string, password: string) {
   return signInWithEmailAndPassword(auth, email, password);
 }
+
+export function currentUser() {
+  return auth.currentUser;
+}
