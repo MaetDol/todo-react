@@ -14,10 +14,17 @@ export const StyledHeaderContainer = styled.div`
   left: 0;
   width: 100%;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+`;
+
+export const StyledUserName = styled.span`
+  color: ${({ theme }) => theme.colors.gray10};
+  ${({ theme }) => theme.typography.title3};
 `;
 
 export const StyledLink = styled(Link)`
-  float: right;
+  margin-left: auto;
   border: none;
   padding: 0;
   background-color: transparent;

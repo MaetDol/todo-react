@@ -1,3 +1,4 @@
+import { currentUser } from 'api/firebase';
 import { useAddTodo, useTodos } from 'api/todo';
 import Icon, { Icons } from 'components/Icon';
 import Todos from 'components/Todos';
@@ -9,6 +10,7 @@ import {
   StyledHeaderContainer,
   StyledLink,
   StyledTodoWrapper,
+  StyledUserName,
 } from './Home.styled';
 
 export default function Home() {
@@ -21,9 +23,12 @@ export default function Home() {
     addTodo(new Todo('', idRef.current++, false, true));
   };
 
+  const email = currentUser()?.email;
+
   return (
     <StyledContainer>
       <StyledHeaderContainer>
+        <StyledUserName>{email}</StyledUserName>
         <StyledLink to="/login">
           <Icon icon={Icons.login} />
         </StyledLink>
