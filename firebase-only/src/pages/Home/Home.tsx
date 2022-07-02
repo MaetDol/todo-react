@@ -14,13 +14,11 @@ import {
 } from './Home.styled';
 
 export default function Home() {
-  const idRef = useRef(1);
-
   const { todos, setTodos } = useTodos();
   const addTodo = useAddTodo(setTodos);
 
   const addHandler = () => {
-    addTodo(new Todo('', idRef.current++, false, true));
+    addTodo(new Todo('', false, true));
   };
 
   const email = currentUser()?.email;
