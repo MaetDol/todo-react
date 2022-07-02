@@ -36,4 +36,9 @@ export const Utils = {
 
     return true;
   },
+
+  fromFirestoreDate(date: { seconds: number; nanoseconds: number }): Date {
+    const time = date.seconds * 1000 + date.nanoseconds / 1_000_000;
+    return new Date(time);
+  },
 };
