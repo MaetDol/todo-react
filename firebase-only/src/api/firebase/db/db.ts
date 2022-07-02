@@ -3,8 +3,6 @@ import {
   collection,
   deleteDoc,
   doc,
-  FirestoreDataConverter,
-  getDoc,
   getDocs,
   getFirestore,
   updateDoc,
@@ -33,25 +31,6 @@ export async function getDatas(document: string): Promise<any[]> {
   const datas: any[] = [];
   (await loadDocuments(document)).forEach((d) => datas.push(d.data()));
   return datas;
-}
-
-export async function loadDocumentWithConverter<T>(
-  document: string,
-  converter: FirestoreDataConverter<T>
-) {
-  const documents = await loadDocuments(document);
-  const convertedDocuments: Promise<T | null>[] = [];
-
-  documents.forEach((d) => {
-    const ref = d.ref.withConverter(converter);
-    convertedDocuments.push(
-      getDoc(ref).then((snapshot) =>
-        snapshot.exists() ? snapshot.data() : null
-      )
-    );
-  });
-
-  return Promise.all(convertedDocuments);
 }
 
 export function updateDocument<T>(document: string, data: T) {
