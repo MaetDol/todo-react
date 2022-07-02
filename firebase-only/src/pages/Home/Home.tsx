@@ -3,7 +3,6 @@ import { useAddTodo, useTodos } from 'api/todo';
 import Icon, { Icons } from 'components/Icon';
 import Todos from 'components/Todos';
 import { Todo } from 'models/Todo';
-import { useRef, useState } from 'react';
 import {
   StyledAddButton,
   StyledContainer,

@@ -3,7 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { Utils } from 'utils/util';
 import { currentUser } from './firebase';
 import { addDocument } from './firebase/db';
-import { getDatas } from './firebase/db/db';
+import { getDatas, updateDocument } from './firebase/db/db';
+
+function baseDocument(sid: string, ...paths: string[]) {
+  return `account/${sid}/todos/${paths.join('/')}`;
+}
 
 function fromFirestore(data: any): Todo {
   if (!data) return new Todo('', false, false);
@@ -26,10 +30,21 @@ export function useAddTodo(
     const user = currentUser();
     if (!user) return;
 
-    addDocument(user.uid, todo.serialize()).then(() =>
-      setTodos((todos) => todos.concat(todo))
-    );
+    addDocument(
+      baseDocument(user.uid, todo.created_at.getTime().toString()),
+      todo.serialize()
+    ).then(() => setTodos((todos) => todos.concat(todo)));
   };
+}
+
+export function setTodo(todo: Todo, callback?: Function) {
+  const user = currentUser();
+  if (!user) return;
+
+  updateDocument(
+    baseDocument(user.uid, todo.created_at.getTime().toString()),
+    todo.serialize()
+  ).then(() => callback && callback());
 }
 
 export function useTodos() {
@@ -38,7 +53,7 @@ export function useTodos() {
     const user = currentUser();
     if (!user) return;
 
-    getDatas(user.uid).then((datas) => {
+    getDatas(baseDocument(user.uid)).then((datas) => {
       setTodos(datas.map(fromFirestore));
     });
   }, []);
