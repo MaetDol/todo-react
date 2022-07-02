@@ -12,8 +12,8 @@ function baseDocument(sid: string, ...paths: string[]) {
 function fromFirestore(data: any): Todo {
   if (!data) return new Todo('', false, false);
 
-  const { content, checked, created_at, updated_at } = data;
-  const todo = new Todo(content, checked, false);
+  const { content, done, created_at, updated_at } = data;
+  const todo = new Todo(content, done, false);
   todo.created_at = created_at
     ? Utils.fromFirestoreDate(created_at)
     : new Date();
@@ -37,14 +37,14 @@ export function useAddTodo(
   };
 }
 
-export function setTodo(todo: Todo, callback?: Function) {
+export function setTodo(todo: Todo) {
   const user = currentUser();
   if (!user) return;
 
-  updateDocument(
+  return updateDocument(
     baseDocument(user.uid, todo.created_at.getTime().toString()),
     todo.serialize()
-  ).then(() => callback && callback());
+  );
 }
 
 export function useTodos() {
