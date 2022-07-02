@@ -1,10 +1,10 @@
 import {
-  addDoc,
   collection,
   deleteDoc,
   doc,
   getDocs,
   getFirestore,
+  setDoc,
   updateDoc,
 } from 'firebase/firestore/lite';
 import { app } from '../init';
@@ -16,11 +16,11 @@ function getDocument(document: string) {
 }
 
 function getCollection(document: string) {
-  return collection(db, 'account', document, 'todos');
+  return collection(db, document);
 }
 
 export function addDocument<T>(document: string, data: T) {
-  return addDoc(getCollection(document), data);
+  return setDoc(getDocument(document), data);
 }
 
 export function loadDocuments(document: string) {
