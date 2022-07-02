@@ -1,3 +1,4 @@
+import { setTodo } from 'api/todo';
 import Todo from 'components/Todo';
 import { Todo as TodoModel } from 'models/Todo';
 import { StyledItem, StyledList } from './Todos.styled';
@@ -28,6 +29,9 @@ export default function Todos({ todos, setTodos }: Props) {
 
     todo.editing = editing;
     setTodos([...todos]);
+    if (!editing) {
+      setTodo(todo);
+    }
   };
 
   return (
