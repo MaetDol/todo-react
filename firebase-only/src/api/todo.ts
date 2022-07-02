@@ -23,18 +23,14 @@ function fromFirestore(data: any): Todo {
   return todo;
 }
 
-export function useAddTodo(
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>
-) {
-  return (todo: Todo) => {
-    const user = currentUser();
-    if (!user) return;
+export function addTodo(todo: Todo) {
+  const user = currentUser();
+  if (!user) return;
 
-    addDocument(
-      baseDocument(user.uid, todo.created_at.getTime().toString()),
-      todo.serialize()
-    ).then(() => setTodos((todos) => todos.concat(todo)));
-  };
+  return addDocument(
+    baseDocument(user.uid, todo.created_at.getTime().toString()),
+    todo.serialize()
+  );
 }
 
 export function setTodo(todo: Todo) {
