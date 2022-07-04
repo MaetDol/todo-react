@@ -1,9 +1,9 @@
 import { Todo } from 'models/Todo';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Utils } from 'utils/util';
 import { currentUser } from './firebase';
 import { addDocument } from './firebase/db';
-import { getDatas, updateDocument } from './firebase/db/db';
+import { deleteDocument, getDatas, updateDocument } from './firebase/db/db';
 
 function baseDocument(sid: string, ...paths: string[]) {
   return `account/${sid}/todos/${paths.join('/')}`;
@@ -41,6 +41,13 @@ export function setTodo(todo: Todo) {
     baseDocument(user.uid, todo.created_at.getTime().toString()),
     todo.serialize()
   );
+}
+
+export function deleteTodo(createdAt: Date) {
+  const user = currentUser();
+  if (!user) return;
+
+  return deleteDocument(baseDocument(user.uid, createdAt.getTime().toString()));
 }
 
 export function useTodos() {
