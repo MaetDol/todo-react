@@ -1,4 +1,4 @@
-import { setTodo } from 'api/todo';
+import { deleteTodo, setTodo } from 'api/todo';
 import Todo from 'components/Todo';
 import { Todo as TodoModel } from 'models/Todo';
 import { StyledItem, StyledList } from './Todos.styled';
@@ -6,6 +6,7 @@ import { StyledItem, StyledList } from './Todos.styled';
 export default function Todos({ todos, setTodos }: Props) {
   const deleteHandler = (createAt: Date) => () => {
     setTodos(todos.filter((todo) => todo.created_at !== createAt));
+    deleteTodo(createAt);
   };
 
   const checkHandler = (createAt: Date) => (checked: boolean) => {
